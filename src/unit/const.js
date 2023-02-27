@@ -63,7 +63,9 @@ const clearPoints = [100, 300, 700, 1500];
 
 const StorageKey = 'REACT_TETRIS';
 
+// JavaScript 闭包
 const lastRecord = (() => { // 上一把的状态
+  // localStorage 用于长久保存整个网站的数据，保存的数据没有过期时间，直到手动去删除。
   let data = localStorage.getItem(StorageKey);
   if (!data) {
     return false;
@@ -72,6 +74,7 @@ const lastRecord = (() => { // 上一把的状态
     if (window.btoa) {
       data = atob(data);
     }
+    // 将已编码 URI 中所有能识别的转义序列转换成原字符。
     data = decodeURIComponent(data);
     data = JSON.parse(data);
   } catch (e) {
@@ -85,10 +88,13 @@ const lastRecord = (() => { // 上一把的状态
 
 const maxPoint = 999999;
 
+// 查网页当前的适配屏幕样式是哪个
 const transform = (function () {
   const trans = ['transform', 'webkitTransform', 'msTransform', 'mozTransform', 'oTransform'];
+  // document.body 是包含当前页面内容的元素，对于拥有 <body> 元素的文档来说，返回的是 <body> 元素，对于拥有 <frameset> 元素的文档来说，返回的是最外层的 <frameset> 元素。
   const body = document.body;
-  return trans.filter((e) => body.style[e] !== undefined)[0];
+  // 创建给定数组一部分的浅拷贝，其包含通过所提供函数实现的测试的所有元素。
+  return trans.filter((e) => body.style[e] !== undefined)[0]; // 返回第一个合法值
 }());
 
 const eachLines = 20; // 每消除eachLines行, 增加速度
