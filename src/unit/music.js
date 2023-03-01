@@ -27,10 +27,13 @@ const music = {};
   req.responseType = 'arraybuffer';
 
   req.onload = () => {
+    // 异步解码音频文件中的 ArrayBuffer
     context.decodeAudioData(req.response, (buf) => { // 将拿到的audio解码转为buffer
       const getSource = () => { // 创建source源。
+        // 创建一个新的AudioBufferSourceNode接口，该接口可以通过AudioBuffer 对象来播放音频数据
         const source = context.createBufferSource();
         source.buffer = buf;
+        // connect the AudioBufferSourceNode to the destination so we can hear the sound
         source.connect(context.destination);
         return source;
       };
