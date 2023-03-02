@@ -23,8 +23,8 @@ const music = {};
   const url = './music.mp3';
   const context = new AudioContext();
   const req = new XMLHttpRequest();
-  req.open('GET', url, true);
-  req.responseType = 'arraybuffer';
+  req.open('GET', url, true); // 初始化一个请求。
+  req.responseType = 'arraybuffer'; // 一个用于定义响应类型的枚举值（enumerated value）。
 
   req.onload = () => {
     // 异步解码音频文件中的 ArrayBuffer
@@ -43,7 +43,7 @@ const music = {};
       };
 
       music.start = () => { // 游戏开始
-        music.killStart();
+        music.killStart(); // start里的内容只能执行一次
         if (!store.getState().get('music')) {
           return;
         }
